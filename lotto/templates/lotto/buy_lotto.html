@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>로또 구매</title>
+</head>
+<body>
+    <h1>{{ current_round.round_number }}회차 로또 구매</h1>
+    <p><a href="{% url 'lotto_index' %}">[메인으로 돌아가기]</a></p>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li style="color: red;">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <hr>
+
+    <h2>1. 자동 구매</h2>
+    <form action="{% url 'buy_lotto' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="buy_type" value="auto">
+        <button type="submit">자동으로 1장 구매하기</button>
+    </form>
+
+    <hr>
+
+    <h2>2. 수동 구매</h2>
+    <p>1~45 사이의 숫자 6개를 선택하세요.</p>
+    <form action="{% url 'buy_lotto' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="buy_type" value="manual">
+        <label>번호 1: <input type="number" name="num1" min="1" max="45" required></label><br>
+        <label>번호 2: <input type="number" name="num2" min="1" max="45" required></label><br>
+        <label>번호 3: <input type="number" name="num3" min="1" max="45" required></label><br>
+        <label>번호 4: <input type="number" name="num4" min="1" max="45" required></label><br>
+        <label>번호 5: <input type="number" name="num5" min="1" max="45" required></label><br>
+        <label>번호 6: <input type="number" name="num6" min="1" max="45" required></label><br>
+        <button type="submit">수동으로 1장 구매하기</button>
+    </form>
+
+</body>
+</html>

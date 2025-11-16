@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # 1. Django 웹 서비스
+  web:
+    build: .
+    # 개발 중에는 runserver로 실행
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app  # 로컬 코드를 컨테이너와 실시간 동기화
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      # DB 연결 정보 (db 서비스와 동일하게 맞춤)
+      - POSTGRES_DB=lotto_db
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+
+  # 2. PostgreSQL 데이터베이스 서비스
+  db:
+    image: postgres:14
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      # DB 생성 정보
+      - POSTGRES_DB=lotto_db
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+
+volumes:
+  postgres_data:

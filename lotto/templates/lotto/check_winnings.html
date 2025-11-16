@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>내 당첨 결과</title>
+</head>
+<body>
+    <h1>내 당첨 결과 확인</h1>
+    <p><a href="{% url 'lotto_index' %}">[메인으로 돌아가기]</a></p>
+
+    <hr>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>회차</th>
+                <th>구매 번호</th>
+                <th>당첨 등수</th>
+                <th>당첨 번호</th>
+                <th>보너스 번호</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in my_results %}
+                <tr>
+                    <td>{{ result.ticket.lotto_round.round_number }}회차</td>
+                    <td><strong>{{ result.ticket.numbers }}</strong></td>
+                    <td>
+                        {% if result.rank == 0 %}
+                            꽝
+                        {% elif result.rank > 0 %}
+                            <strong>{{ result.rank }}등</strong>
+                        {% endif %}
+                    </td>
+                    <td>{{ result.ticket.lotto_round.winning_numbers }}</td>
+                    <td>{{ result.ticket.lotto_round.bonus_number }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">아직 당첨 확인 결과가 없습니다. (관리자가 추첨 및 당첨 확인을 실행해야 합니다)</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
