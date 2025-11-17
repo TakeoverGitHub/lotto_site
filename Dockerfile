@@ -13,6 +13,3 @@ RUN pip install -r requirements.txt
 
 # 5. 프로젝트 코드 전체 복사
 COPY . .
-
-# (참고: Gunicorn을 쓴다면 여기에 CMD 추가)
-# CMD ["gunicorn", "lotto_project.wsgi:application", "--bind", "0.0.0.0:8000"]

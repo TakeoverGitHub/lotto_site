@@ -20,9 +20,9 @@
         <h2>구매하기</h2>
         {% if current_round %}
             <p>현재 구매 가능한 회차: <strong>{{ current_round.round_number }}회차</strong></p>
+        {% else %}
             <a href="{% url 'buy_lotto' %}">[로또 구매하러 가기]</a>
             <a href="{% url 'check_winnings' %}">[내 당첨 결과 확인하기]</a>
-        {% else %}
             <p>현재 구매 가능한 회차가 없습니다. 관리자에게 문의하세요.</p>
         {% endif %}
 
