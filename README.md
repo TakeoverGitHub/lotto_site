@@ -1,2 +1,2 @@
-# lotto_project
-opensw-basic lotto_program
+# lotto_site
+opensw-basic lotto_site
